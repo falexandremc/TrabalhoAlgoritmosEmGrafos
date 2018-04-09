@@ -1,10 +1,6 @@
 package TrabalhoAlgoritmosEmGrafos.tools.algoritmos.DepthFirstSearch;
 
-import java.util.Scanner;
 import java.util.Stack;
-
-import TrabalhoAlgoritmosEmGrafos.tools.grafos.GrafosCriador;
-import TrabalhoAlgoritmosEmGrafos.tools.readIO.ReadIO;
 
 public class DFS {
 
@@ -34,57 +30,42 @@ public class DFS {
         DFS(grafo, grafo.length);
     }
 
-    private static void DFS(int[][] grafo, int i) {
-        Stack<Integer> pilha = new Stack<Integer>();
-        Grafo[] lista = new Grafo[i];
-        int time = 0;
-        for (int j = 0; j < i; j++) {
-            lista[j] = new Grafo();
-
-        }
-        int vertexChoose = maxVertex(grafo);
-        pilha.push(new Integer(vertexChoose));
-        int v;
+    private static void DFS(int[][] grafo, int i) {     
+        Vertice[] lista = new Vertice[i];
+        for (int j = 0; j < i; j++)
+            lista[j] = new Vertice();
+        
+        Stack<Integer> pilha = new Stack<>();
+        pilha.push(maxVertex(grafo));
+        int v, time = 0;
         while (!pilha.isEmpty()) {
             v = pilha.peek();
             pilha.pop();
-            if (lista[v].getCor() == 0) {
-                System.out.print(v + " ");
+            if (lista[v].getCor() == Cor.BRANCO) {
                 lista[v].setD(time++);
-                lista[v].setCor(1);
+                lista[v].setCor(Cor.CINZA);
             }
 
-            for (int j = 0; j < lista.length; j++) {
-                if (grafo[v][j] == 1) {
-                    if (lista[j].getCor() == 0) {
+            for (int j = 0; j < lista.length; j++)
+                if (grafo[v][j] == 1)
+                    if (lista[j].getCor() == Cor.BRANCO)
                         pilha.push(j);
-
-                    }
-                }
-            }
-
         }
 
     }
 
     private static int maxVertex(int[][] grafo) {
-        int pos = 0;
-        int max = 0;
-        int cont = 0;
+        int pos = 0, max = 0, cont = 0;
         for (int i = 0; i < grafo.length; i++) {
-            for (int j = 0; j < grafo.length; j++) {
-                if (grafo[i][j] == 1) {
+            for (int j = 0; j < grafo.length; j++)
+                if (grafo[i][j] == 1)
                     cont++;
-                }
-            }
             if (i == 0) {
                 max = cont;
                 pos = 0;
-            } else {
-                if (max < cont) {
-                    max = cont;
-                    pos = i;
-                }
+            } else if (max < cont) {
+                max = cont;
+                pos = i;
             }
             cont = 0;
         }
