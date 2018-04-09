@@ -33,4 +33,5 @@ public class Vertice {
     public void setD(int d) {
         this.d = d;
     }
+ 
 }
