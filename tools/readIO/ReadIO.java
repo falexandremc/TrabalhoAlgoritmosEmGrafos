@@ -55,8 +55,9 @@ public class ReadIO {
         File files[] = dir.listFiles();
         Pattern regex = Pattern.compile("txt_saida");
         Pattern regex2 = Pattern.compile("txt.saida");
-        for (File file : files)
+        for (File file : files) {
             if (!regex.matcher(file.getName()).find() && !regex2.matcher(file.getName()).find())
                 System.out.println(file.getName());
+        }
     }
 }

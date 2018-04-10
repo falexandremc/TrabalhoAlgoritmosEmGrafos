@@ -8,6 +8,7 @@ import TrabalhoAlgoritmosEmGrafos.tools.grafos.GrafosCriador;
 import TrabalhoAlgoritmosEmGrafos.tools.readIO.ReadIO;
 
 
+
 public class DFS {
 	private static int time;
 	@SuppressWarnings({ "null" })
@@ -18,8 +19,11 @@ public class DFS {
 			//System.out.println(i+":"+vertices[i].getCor());
 		}
 		Stack<Integer> pilha=new Stack<Integer>( );
-		pilha.push(maxVertex(grafo));
+		int vertex=maxVertex(grafo);
+		pilha.push(vertex);
 		time=1;
+		vertices[vertex].setCor(Cor.CINZA);
+		vertices[vertex].setD(time++);
 		Integer u,v;
 		while(!pilha.isEmpty( )){
 			u=(Integer) pilha.peek( );
@@ -74,8 +78,10 @@ public class DFS {
 		String arquivo=new Scanner(System.in).nextLine();
 		int [][]matriz=ReadIO.carregarGrafo(arquivo);
 		int [][]grafo=GrafosCriador.paraMatrizDeAdjacencia(matriz);
+		int o=0;
 		for (Vertice v : DFS(grafo)) {
-			System.out.println(v.getD()+"/"+v.getF());
+			System.out.println(o+":"+v.getD()+"/"+v.getF());
+			o++;
 		}
 	}
 }
