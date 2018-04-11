@@ -13,6 +13,7 @@ public class DFS {
 	private static int time;
 	@SuppressWarnings({ "null" })
 	public static Vertice [] DFS(int [][]grafo) {
+		long initialTime=System.currentTimeMillis();
 		Vertice vertices[ ]=new Vertice[ grafo.length ];
 		for(int i=0;i<grafo.length;i++) {
 			vertices[i]=new Vertice( );
@@ -40,6 +41,7 @@ public class DFS {
 				pilha.pop( );
 			}
 		}
+		System.out.printf("Tempo(em s): %.4f\n",((System.currentTimeMillis()-initialTime)/1000.0));
 		return vertices;
 	}
 	public static Integer adj(int u,Vertice []vertices,int [][]adjacentes){
@@ -53,24 +55,25 @@ public class DFS {
 		int pos=0;
 		int max=0;
 		int cont=0;
+		
 		for (int i = 0; i < grafo.length; i++) {
 			for (int j = 0; j < grafo.length; j++) {
-				if(grafo[i][j]==1) {
+				if(grafo[i][j]==1)
 					cont++;
-				}
+				if(grafo[j][i]==1) 
+					cont++;
 			}
-			if(i==0) {
+
+			if(max<cont) {
 				max=cont;
-				pos=0;
-			}else {
-				if(max<=cont) {
-					max=cont;
-					pos=i;
-				}
+				pos=i;
 			}
-			//System.out.println(i+":"+cont);
+
+
+			
 			cont=0;
 		}
+		System.out.println(pos);
 		return pos;
 	}
 	public static void main(String[] args) throws IOException {
@@ -79,9 +82,11 @@ public class DFS {
 		int [][]matriz=ReadIO.carregarGrafo(arquivo);
 		int [][]grafo=GrafosCriador.paraMatrizDeAdjacencia(matriz);
 		int o=0;
+
 		for (Vertice v : DFS(grafo)) {
 			System.out.println(o+":"+v.getD()+"/"+v.getF());
 			o++;
 		}
+
 	}
 }
