@@ -73,7 +73,6 @@ public class DFS {
 			
 			cont=0;
 		}
-		System.out.println(pos);
 		return pos;
 	}
 	public static void main(String[] args) throws IOException {
