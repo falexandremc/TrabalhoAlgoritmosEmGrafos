@@ -11,7 +11,7 @@ import java.util.Collections;
 
 public class DFS2 {
 
-    private static int tmp = 0;
+    private static int maxVertexAuxiliar = 0;
     private static int time;
 
     @SuppressWarnings({"null"})
@@ -58,7 +58,7 @@ public class DFS2 {
             //System.out.println(i+":"+vertices[i].getCor());
         }
         Stack<Integer> pilha = new Stack<>();
-        int vertex = tmp;
+        int vertex = maxVertexAuxiliar;
         pilha.push(vertex);
         time = 1;
         vertices[vertex].setCor(Cor.CINZA);
@@ -150,7 +150,7 @@ public class DFS2 {
         LinkedList<LinkedList<Integer>> grafo = GrafosCriador.paraListaDeAdjacencia(matriz);
         //DFS(grafo);
         int o = 0;
-        tmp = maxVertex(GrafosCriador.paraMatrizDeAdjacencia(matriz));
+        maxVertexAuxiliar = maxVertex(GrafosCriador.paraMatrizDeAdjacencia(matriz));
         for (Vertice v : DFS(grafo)) {
             System.out.println(o + ":" + v.getD() + "/" + v.getF());
             o++;
